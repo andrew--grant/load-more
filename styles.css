@@ -1,0 +1,21 @@
+#results {
+    width: 60%;
+    padding: 1em;
+    margin: auto;
+}
+
+.result {
+    background-color: aliceblue;
+    width: 100%;
+    padding: 1em;
+    margin: 0.5em;
+}
+
+#load-more {
+    width: 50%;
+    padding: 1em;
+    background-color: aliceblue;
+    margin: auto;
+    display: block;
+    border: solid 1px cornflowerblue;
+}
