@@ -20,7 +20,6 @@ LoadMore.prototype.loadData = function (dataUrl, callback) {
     var self = this;
     $.getJSON("data.json",
         function (data) {
-            console.log("data len " + data.results.length);
             var totalResults = data.results.length;
             var items = [];
             var dataArr = data.results.splice(self._index, self._pageSize);
@@ -31,10 +30,8 @@ LoadMore.prototype.loadData = function (dataUrl, callback) {
                 $(items.join("")).appendTo(self._container);
                 self.scrollToElement($(".result").get(self._index));
                 self._itemsCurrentlyDisplayed += dataArr.length;
-                console.log(data.results.length + " / " +  self._itemsCurrentlyDisplayed);
                 if (self._itemsCurrentlyDisplayed >= totalResults) {
                     self._trigger.hide();
-                    console.log("no more!!!");
                 }
                 self._index += self._pageSize;
                 if (callback != null) {
@@ -63,7 +60,9 @@ loadMore.init(
     "#load-more",
     "#results",
     function () {
+        // todo: feedback anim
+        // todo: options approach
+        // todo: some unit tests
         // $("#load-more").text(".......");
     });
 
-//todo: feedback anim
