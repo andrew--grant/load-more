@@ -27,7 +27,6 @@ LoadMore.prototype.scrollToElement = function (selector, time, verticalOffset) {
 LoadMore.prototype.loadData = function () {
     var self = this;
     self.triggerFeedback(true);
-    var f = function () {
     $.getJSON(self.options.dataUrl,
         function (data) {
             self.triggerFeedback(false);
@@ -56,9 +55,6 @@ LoadMore.prototype.loadData = function () {
                 }
             }
         });
-    }
-
-    setTimeout(f, 1000);
 };
 
 LoadMore.prototype.triggerFeedback = function (isLoading) {
@@ -85,7 +81,7 @@ LoadMore.prototype.init = function () {
 // example usage
 var loadMore = new LoadMore(
     {
-        "dataUrl": "data.json",
+        "dataUrl": "https://s3-us-west-2.amazonaws.com/s.cdpn.io/173252/data.json",
         "pageSize":3
     });
 
