@@ -19,9 +19,18 @@ LoadMore.prototype.scrollToElement = function (selector, time, verticalOffset) {
     var element = $(selector);
     var offset = element.offset();
     var offsetTop = offset.top + verticalOffset;
-    $('html, body').animate({
-        scrollTop: offsetTop
-    }, time);
+    if (navigator.userAgent.match(/(iPod|iPhone|iPad|Android)/)) {
+        //setTimeout(function () {
+        //        window.scrollTo(0, offsetTop);
+        //    }, 100
+        //);
+    } else {
+        $('html,body').animate({
+            scrollTop: offsetTop
+        }, 800, function(){
+            $('html,body').clearQueue();
+        });
+    }
 };
 
 LoadMore.prototype.loadData = function () {
@@ -40,12 +49,11 @@ LoadMore.prototype.loadData = function () {
                 $(items.join("")).appendTo(self.options.container);
                 var scrollToEl = $(".result").get(self._index);
                 self._index += self.options.pageSize;
-                if(scrollToEl){
+                if (scrollToEl) {
                     // occurs only when not the initial
                     // load of data
                     self.scrollToElement(scrollToEl);
                 }
-
                 self._itemsCurrentlyDisplayed += dataArr.length;
                 if (self._itemsCurrentlyDisplayed >= totalResults) {
                     self._trigger.hide();
@@ -82,7 +90,7 @@ LoadMore.prototype.init = function () {
 var loadMore = new LoadMore(
     {
         "dataUrl": "https://s3-us-west-2.amazonaws.com/s.cdpn.io/173252/data.json",
-        "pageSize":3
+        "pageSize": 3
     });
 
 loadMore.init();
